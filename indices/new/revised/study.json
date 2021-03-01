@@ -1,0 +1,257 @@
+{
+  "settings": {
+    "index.mapping.ignore_malformed": true,
+    "index.number_of_shards": 1,
+    "index.auto_expand_replicas": "0-all",
+    "analysis": {
+      "analyzer": {
+        "default": {
+          "tokenizer": "default_tokenizer",
+          "char_filter": [
+            "ecrin_remove_dot",
+            "ecrin_rplc_apostrophes"
+          ],
+          "filter": [
+            "lowercase",
+            "ecrin_synonyms",
+            "default_stop"
+          ]
+        }
+      },
+      "filter": {
+        "ecrin_synonyms" : {
+          "type" : "synonym",
+          "synonyms_path" : "synonyms/all_synonyms.txt"
+        },
+        "default_stop": {
+          "type": "stop",
+          "stopwords": "_english_"
+        }
+      },
+      "char_filter": {
+        "ecrin_remove_dot": {
+          "type": "pattern_replace",
+          "pattern": "([.])",
+          "replacement": ""
+        },
+        "ecrin_rplc_apostrophes": {
+          "type": "pattern_replace",
+          "pattern": "(')",
+          "replacement": "’"
+        }
+      },
+      "tokenizer": {
+        "default_tokenizer": {
+          "type": "standard"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "_source": {
+      "enabled": true
+    },
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "display_title": {
+        "type": "text",
+        "fielddata": true,
+        "analyzer":"standard",
+        "copy_to": "text_container"
+      },
+      "brief_description": {
+        "type": "text",
+        "fielddata": true,
+        "analyzer":"standard",
+        "copy_to": "text_container"
+      },
+      "data_sharing_statement": {
+        "type": "text",
+        "analyzer":"standard",
+        "copy_to": "text_container"
+      },
+      "study_type": {
+        "type": "keyword",
+        "copy_to": "text_container"
+      },
+      "study_status": {
+        "type": "keyword",
+        "copy_to": "text_container"
+      },
+      "study_gender_elig": {
+        "type": "keyword",
+        "copy_to": "text_container"
+      },
+      "study_enrolment": {
+        "type": "integer"
+      },
+      "min_age": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          },
+          "unit_name": {
+            "type": "keyword"
+          }
+        }
+      },
+      "max_age": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          },
+          "unit_name": {
+            "type": "keyword"
+          }
+        }
+      },
+      "study_identifiers": {
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "identifier_value": {
+            "type": "text",
+            "analyzer": "keyword",
+            "fielddata": true,
+            "copy_to": "text_container"
+          },
+          "identifier_type": {
+            "type": "keyword",
+            "copy_to": "text_container"
+          },
+          "identifier_date": {
+            "type": "date",
+            "format": "yyyy MMM dd"
+          },
+          "identifier_link": {
+            "type": "keyword",
+            "eager_global_ordinals": true
+          },
+          "identifier_org": {
+            "type": "text",
+            "copy_to": "text_container"
+          }
+        }
+      },
+      "study_titles": {
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title_type": {
+            "type": "keyword",
+            "copy_to": "text_container"
+          },
+          "title_text": {
+            "type": "text",
+            "fielddata": true,
+            "analyzer": "standard",
+            "copy_to": "text_container"
+          },
+          "lang_code": {
+            "type": "keyword",
+            "eager_global_ordinals": true
+          },
+          "comments": {
+            "type": "text"
+          }
+        }
+      },
+      "study_features": {
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "feature_type": {
+            "type": "keyword",
+            "copy_to": "text_container"
+          },
+          "feature_value": {
+            "type": "keyword",
+            "copy_to": "text_container"
+          }
+        }
+      },
+      "study_topics": {
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "topic_type": {
+            "type": "keyword",
+            "copy_to": "text_container"
+          },
+          "mesh_coded": {
+            "type": "boolean"
+          },
+          "topic_code": {
+            "type": "text",
+            "fielddata": true,
+            "copy_to": "text_container"
+          },
+          "topic_value": {
+            "type": "text",
+            "fielddata": true,
+            "analyzer": "standard",
+            "copy_to": "text_container"
+          },
+          "topic_qualcode": {
+            "type": "text",
+            "fielddata": true,
+            "analyzer": "standard",
+            "copy_to": "text_container"
+          },
+          "topic_qualvalue": {
+            "type": "text",
+            "fielddata": true,
+            "analyzer": "standard",
+            "copy_to": "text_container"
+          },
+          "original_value": {
+            "type": "text",
+            "fielddata": true,
+            "analyzer": "standard",
+            "copy_to": "text_container"
+          }
+        }
+      },
+      "study_relationships": {
+        "type": "nested",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "relationship_type": {
+            "type": "keyword",
+            "copy_to": "text_container"
+          },
+          "target_study_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "linked_data_objects": {
+        "type": "integer"
+      },
+      "provenance_string": {
+        "type": "text",
+        "copy_to": "text_container"
+      },
+      "text_container": {
+        "type": "text",
+        "analyzer": "standard",
+        "fielddata": true
+      }
+    }
+  }
+}
