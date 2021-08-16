@@ -59,28 +59,12 @@
         "fielddata": true
       },
       "brief_description": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "text",
-            "fielddata": true
-          },
-          "contains_html": {
-            "type": "boolean"
-          }
-        }
+        "type": "text",
+        "fielddata": true
       },
       "data_sharing_statement": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "text",
-            "fielddata": true
-          },
-          "contains_html": {
-            "type": "boolean"
-          }
-        }
+        "type": "text",
+        "fielddata": true
       },
       "study_type": {
         "type": "object",
@@ -119,7 +103,8 @@
         }
       },
       "study_enrolment": {
-        "type": "integer"
+        "type": "text",
+        "fielddata": true
       },
       "min_age": {
         "type": "object",
@@ -189,6 +174,10 @@
                 "type": "integer"
               },
               "name": {
+                "type": "text",
+                "fielddata": true
+              },
+              "ror_id": {
                 "type": "text",
                 "fielddata": true
               }
@@ -281,19 +270,19 @@
           "mesh_coded": {
             "type": "boolean"
           },
-          "topic_code": {
+          "mesh_code": {
             "type": "text",
             "fielddata": true
           },
-          "topic_value": {
+          "mesh_value": {
             "type": "text",
             "fielddata": true
           },
-          "topic_qualcode": {
+          "mesh_qualcode": {
             "type": "text",
             "fielddata": true
           },
-          "topic_qualvalue": {
+          "mesh_qualvalue": {
             "type": "text",
             "fielddata": true
           },

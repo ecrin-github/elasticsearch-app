@@ -7,11 +7,11 @@ elasticsearch_host = 'http://localhost:9200/'
 es_client = Elasticsearch([elasticsearch_host], verify_certs=True)
 
 # JSON file with study index description
-with open('./indices/new/revised/study.json') as study_indices:
+with open('./indices/study.json') as study_indices:
     study_index = json.load(study_indices)
 
 # JSON file with data object index description
-with open('./indices/new/revised/data_object.json') as data_object_indices:
+with open('./indices/data_object.json') as data_object_indices:
     data_object_index = json.load(data_object_indices)
 
 # Creation of both indices

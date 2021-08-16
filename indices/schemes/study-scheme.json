@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://ecrin.org/json_schemas/mdrstudy/v5.json",
-  "title": "XDC Study definition",
-  "description": "ECRIN Metadata Repository for clinical research objects, Study JSON definition, version 5 October 2020",
+  "$id": "http://ecrin.org/json_schemas/mdrstudy/v6.json",
+  "title": "Study definition",
+  "description": "ECRIN Metadata Repository for clinical research objects, Study JSON definition, version 6 August 2021",
   "type": "object",
   "required": [
     "id",
@@ -20,37 +20,15 @@
     },
     "display_title": {
       "type": "string",
-      "description": "By default the public or brief study title. If that is missing then the full scientific title, as used on the protocol document"
+      "description": "By default the public or brief study title. If that is missing then the full scientific title"
     },
     "brief_description": {
-      "type": "object",
-      "description": "Brief description, usually a few lines, of the study",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Text of the description. For some sources may need to be derived from key study features"
-        },
-        "contains_html": {
-          "type": "boolean",
-          "default": false,
-          "description": "Indicates if there are embedded html tags in the description text, as an aid to display management"
-        }
-      }
+      "type": "string",
+      "description": "Brief description, usually a few lines, of the study. For some sources may need to be derived from key study features."
     },
     "data_sharing_statement": {
-      "type": "object",
-      "description": "A statement from the sponsor and / or study leads about their intentions for IPD sharing",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Text of the statement (may be structured in some sources)"
-        },
-        "contains_html": {
-          "type": "boolean",
-          "default": false,
-          "description": "Indicates if there are embedded html tags in the data sharing text, as an aid to display management"
-        }
-      }
+      "type": "string",
+      "description": "A statement from the sponsor and / or study leads about their intentions for IPD sharing (may be structured in some sources)."
     },
     "study_type": {
       "type": "object",
@@ -81,8 +59,8 @@
       }
     },
     "study_enrolment": {
-      "type": "integer",
-      "description": "The anticipated or actual total number of participants in the clinical study."
+      "type": "string",
+      "description": "The anticipated or actual total number of participants in the clinical study. Usually a number but may be a more detailed descriptive phrase"
     },
     "study_gender_elig": {
       "type": "object",
@@ -178,6 +156,10 @@
               "name": {
                 "type": "string",
                 "description": "The default name of the organisation within the ECRIN context database, if it exists, or the name of the organisation as supplied by the source data"
+              },
+              "ror_id": {
+                "type": "string",
+                "description": "The id of the organisation, if knowm, within the ROR (Research Organisation Registry) system. This is a URL linking to the ROR resource."
               }
             }
           },
@@ -231,7 +213,7 @@
           },
           "comments": {
             "type": "string",
-            "description": "Any additional comments regaring the souce or derivation of the title"
+            "description": "Usually indicates the source of the title, to make later comparisons easier."
           }
         }
       }
@@ -312,19 +294,19 @@
             "type": "boolean",
             "description": "Whether or not the topic has been MESH coded"
           },
-          "topic_code": {
+          "mesh_code": {
             "type": "string",
             "description": "The MESH code for the topic if one exists"
           },
-          "topic_value": {
+          "mesh_value": {
             "type": "string",
             "description": "The topic or keyword value or name, as a MESH term if coded, otherwise as provided in the source data"
           },
-          "topic_qualcode": {
+          "mesh_qualcode": {
             "type": "string",
             "description": "Any MESH qualifier code, if one has been applied"
           },
-          "topic_qualvalue": {
+          "mesh_qualvalue": {
             "type": "string",
             "description": "Any MESH qualifier term, if one has been applied"
           },

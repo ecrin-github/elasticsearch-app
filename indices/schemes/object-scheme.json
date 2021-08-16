@@ -1,14 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://ecrin.org/json_schemas/mdrdataobject/v4.json",
+  "$id": "http://ecrin.org/json_schemas/mdrdataobject/v6.json",
   "title": "XDC Data Object definition",
-  "description": "ECRIN Metadata Repository for clinical research objects, Data Object JSON definition, version 5 October 2020",
+  "description": "ECRIN Metadata Repository for clinical research objects, Data Object JSON definition, version 6 August 2021",
   "type": "object",
   "required": [
     "id",
     "data_object_title",
-    "class",
-    "type",
+    "object_class",
+    "object_type",
     "publication_year",
     "access_type"
   ],
@@ -81,6 +81,10 @@
         "name": {
           "type": "string",
           "description": "The default name of the organisation within the ECRIN context database, if it exists, or the name of the organisation as supplied by the source data"
+        },
+        "ror_id": {
+          "type": "string",
+          "description": "The id of the organisation, if knowm, within the ROR (Research Organisation Registry) system. This is a URL linking to the ROR resource."
         }
       }
     },
@@ -221,11 +225,6 @@
       "items": {
         "type": "object",
         "description": "A composite object that indicates the nature of a specific instance of a data object, e.g. a file or a web page",
-        "required": [
-          "id",
-          "repository_org",
-          "file_type"
-        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -368,7 +367,7 @@
               }
             }
           },
-          "is_date_range": {
+          "date_is_range": {
             "type": "boolean",
             "default": false,
             "description": "If true both start and end dates should be considered, otherwise just the start date"
@@ -450,11 +449,11 @@
           },
           "is_individual": {
             "type": "boolean",
-            "description": "Indicates whether the contributor is an individual, e.g. study lead or paper author, or an organisation, e.g. pharma company or research network."
+            "description": "Indicates whether the contributor is an individual, e.g. study lead or paper author, or an organisation, e.g. pharma company or research network. If an organisation the person objhect will be null. If a person, the organisation object will be null."
           },
           "organisation": {
             "type": "object",
-            "description": "The organisation providing the contribution",
+            "description": "The organisation providing the contribution - not required if the contributor is an individual.",
             "properties": {
               "id": {
                 "type": "integer",
@@ -463,6 +462,10 @@
               "name": {
                 "type": "string",
                 "description": "The default name of the organisation, within the ECRIN context database, if it exists, or the name of the organisation as supplied by the source data"
+              },
+              "ror_id": {
+                "type": "string",
+                "description": "The id of the organisation, if knowm, within the ROR (Research Organisation Registry) system. This is a URL linking to the ROR resource."
               }
             }
           },
@@ -486,9 +489,21 @@
                 "type": "string",
                 "description": "The person's ORCID identifier, if known"
               },
-              "affiliation": {
+              "affiliation_string": {
                 "type": "string",
                 "description": "The person's organisational affiliation as it appears in the source data"
+              },
+              "affiliation_org_id": {
+                "type": "integer",
+                "description": "The id of the organisation within the MDR, if it can be identified from the affiliation string."
+              },
+              "affiliation_org_name": {
+                "type": "string",
+                "description": "The name of the organisation to which the person is affiliated, as deduced from the affiliation string."
+              },
+              "affiliation_org_ror_id": {
+                "type": "string",
+                "description": "The id of the organisation to which the person is affiliated, if knowm, within the ROR (Research Organisation Registry) system. This is a URL linking to the ROR resource."
               }
             }
           }
@@ -527,19 +542,19 @@
             "type": "boolean",
             "description": "Whether or not the topic has been MESH coded"
           },
-          "topic_code": {
+          "mesh_code": {
             "type": "string",
             "description": "The MESH code for the topic if one exists"
           },
-          "topic_value": {
+          "mesh_value": {
             "type": "string",
             "description": "The topic or keyword value or name, as a MESH code if coded, otherwise as provided in the source data"
           },
-          "topic_qualcode": {
+          "mesh_qualcode": {
             "type": "string",
             "description": "Any MESH qualifier code, if one has been applied"
           },
-          "topic_qualvalue": {
+          "mesh_qualvalue": {
             "type": "string",
             "description": "Any MESH qualifier term, if one has been applied"
           },
@@ -594,6 +609,10 @@
               "name": {
                 "type": "string",
                 "description": "The default name of the organisation within the ECRIN context database, if it exists, or the name of the organisation as supplied by the source data"
+              },
+              "ror_id": {
+                "type": "string",
+                "description": "The id of the organisation, if knowm, within the ROR (Research Organisation Registry) system. This is a URL linking to the ROR resource."
               }
             }
           },
@@ -644,10 +663,6 @@
           "lang_code": {
             "type": "string",
             "description": "A two letter ISO 369-1 code indicating the language of the description."
-          },
-          "contains_html": {
-            "type": "boolean",
-            "description": "Whether the title text has any embedded html tags"
           }
         }
       }
@@ -731,4 +746,3 @@
     }
   }
 }
-

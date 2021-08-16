@@ -108,6 +108,10 @@
           "name":{
             "type":"text",
             "fielddata": true
+          },
+          "ror_id":{
+            "type":"text",
+            "fielddata": true
           }
         }
       },
@@ -136,7 +140,7 @@
           },
           "url_last_checked": {
             "type":"date",
-            "format":"YYYY MM DD"
+            "format":"yyyy MM dd"
           }
         }
       },
@@ -251,7 +255,7 @@
               },
               "url_last_checked":{
                 "type":"date",
-                "format":"YYYY MMM dd"
+                "format":"yyyy MMM dd"
               }
             }
           },
@@ -330,7 +334,7 @@
               }
             }
           },
-          "is_date_range":{
+          "date_is_range":{
             "type":"boolean"
           },
           "date_as_string":{
@@ -401,6 +405,10 @@
               "name":{
                 "type":"text",
                 "fielddata": true
+              },
+              "ror_id":{
+                "type":"text",
+                "fielddata": true
               }
             }
           },
@@ -423,7 +431,18 @@
                 "type": "text",
                 "fielddata": true
               },
-              "affiliation": {
+              "affiliation_string": {
+                "type": "text",
+                "fielddata": true
+              },
+              "affiliation_org_id": {
+                "type": "integer"
+              },
+              "affiliation_org_name": {
+                "type": "text",
+                "fielddata": true
+              },
+              "affiliation_org_ror_id": {
                 "type": "text",
                 "fielddata": true
               }
@@ -452,19 +471,19 @@
           "mesh_coded": {
             "type": "boolean"
           },
-          "topic_code": {
+          "mesh_code": {
             "type": "text",
             "fielddata": true
           },
-          "topic_value":{
+          "mesh_value":{
             "type":"text",
             "fielddata": true
           },
-          "topic_qualcode": {
+          "mesh_qualcode": {
             "type": "text",
             "fielddata": true
           },
-          "topic_qualvalue": {
+          "mesh_qualvalue": {
             "type": "text",
             "fielddata": true
           },
@@ -498,7 +517,7 @@
           },
           "identifier_date":{
             "type":"date",
-            "format":"YYYY MMM dd"
+            "format":"yyyy MMM dd"
           },
           "identifier_org":{
             "type":"object",
@@ -507,6 +526,10 @@
                 "type":"integer"
               },
               "name":{
+                "type":"text",
+                "fielddata": true
+              },
+              "ror_id":{
                 "type":"text",
                 "fielddata": true
               }
@@ -543,9 +566,6 @@
           "lang_code":{
             "type":"keyword",
             "eager_global_ordinals": true
-          },
-          "contains_html":{
-            "type":"boolean"
           }
         }
       },
@@ -560,7 +580,7 @@
             "fielddata": true
           },
           "rights_url":{
-            "type":"text",
+            "type":"keyword",
             "fielddata": true
           },
           "comments": {
