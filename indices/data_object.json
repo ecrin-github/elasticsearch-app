@@ -52,8 +52,7 @@
         "type":"integer"
       },
       "file_type":{
-        "type":"text",
-        "fielddata": true
+        "type":"text"
       },
       "doi":{
         "type":"keyword",
@@ -135,8 +134,8 @@
             "fielddata": true
           },
           "url": {
-            "type": "text",
-            "fielddata": true
+            "type": "keyword",
+            "eager_global_ordinals": true
           },
           "url_last_checked": {
             "type":"date",
@@ -250,8 +249,8 @@
                 "type": "boolean"
               },
               "url": {
-                "type": "text",
-                "fielddata": true
+                "type": "keyword",
+                "eager_global_ordinals": true
               },
               "url_last_checked":{
                 "type":"date",
@@ -479,14 +478,6 @@
             "type":"text",
             "fielddata": true
           },
-          "mesh_qualcode": {
-            "type": "text",
-            "fielddata": true
-          },
-          "mesh_qualvalue": {
-            "type": "text",
-            "fielddata": true
-          },
           "original_value": {
             "type": "text",
             "fielddata": true
@@ -581,7 +572,7 @@
           },
           "rights_url":{
             "type":"keyword",
-            "fielddata": true
+            "eager_global_ordinals": true
           },
           "comments": {
             "type": "text",

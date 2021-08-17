@@ -278,14 +278,6 @@
             "type": "text",
             "fielddata": true
           },
-          "mesh_qualcode": {
-            "type": "text",
-            "fielddata": true
-          },
-          "mesh_qualvalue": {
-            "type": "text",
-            "fielddata": true
-          },
           "original_value": {
             "type": "text",
             "fielddata": true

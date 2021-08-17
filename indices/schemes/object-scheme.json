@@ -550,14 +550,6 @@
             "type": "string",
             "description": "The topic or keyword value or name, as a MESH code if coded, otherwise as provided in the source data"
           },
-          "mesh_qualcode": {
-            "type": "string",
-            "description": "Any MESH qualifier code, if one has been applied"
-          },
-          "mesh_qualvalue": {
-            "type": "string",
-            "description": "Any MESH qualifier term, if one has been applied"
-          },
           "original_value": {
             "type": "string",
             "description": "The original value of the term, whether coded or not"
